@@ -1,0 +1,16 @@
+function goScroll(target,fun){
+        //保证当前元素只有一个定时器在运动，
+        clearInterval(document.timer);
+        document.timer = setInterval(function (){
+
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            var speed = (target-scrollTop)/5;
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+            if(scrollTop == target){
+               clearInterval(document.timer);
+                            fun&&fun();
+            }
+            document.documentElement.scrollTop = document.body.scrollTop = scrollTop + speed;
+            },30);
+        }
+}
